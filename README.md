@@ -1,5 +1,10 @@
 # vue-shopping
 
+## A Vue.js project
+* using Vue-cli, Vue-router, Vuex
+* bootstrap styling
+* RWD webpage
+
 ## Project setup
 ```
 npm install
