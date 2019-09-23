@@ -1,25 +1,30 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
 
-Vue.use(Router)
+import Home from './components/home/Home.vue';
+import Cart from './components/cart/Cart.vue';
+import Checkout from './components/checkout/Checkout.vue';
+import Completion from './components/checkout/Completion.vue';
+
+Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
-  ]
-})
+	mode: 'history',
+	base: process.env.BASE_URL,
+	routes: [
+		{ path: '/', name: 'home', component: Home },
+		{ path: '/cart', name: 'cart', component: Cart },
+		{ path: '/checkout', name: 'checkout', component: Checkout },
+		{ path: '/checkout/completion', name: 'completion', component: Completion },
+		{ path: '*', redirect: '/' }
+	],
+	scrollBehavior(to, from, savedPosition) {
+		if (savedPosition) {
+			return savedPosition;
+		}
+		if (to.hash) {
+			return { seletor: to.hash };
+		}
+		return { x: 0, y: 0 };
+	}
+});

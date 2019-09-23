@@ -1,31 +1,60 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div>
+    <app-header class="fixed-top"></app-header>
+
+    <div class="container" style="min-height: 600px">
+      <transition name="slide" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </div>
-    <router-view/>
+
+    <app-footer></app-footer>
   </div>
 </template>
 
+<script>
+import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
+
+export default {
+  components: {
+    appHeader: Header,
+    appFooter: Footer
+  },
+  created() {
+    this.$store.dispatch('initGoods');
+  }
+}
+</script>
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+  body {
+    padding-top: 80px;
+    font-family: 'Roboto', sans-serif;
+  }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  .slide-enter,
+  .slide-leave-to {
+    opacity: 0;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  .slide-enter-active {
+    animation: slide-in .4s ease-out forwards;
+    transition: opacity .4s;
+  }
+
+  .slide-leave-active {
+    animation: slide-out .4s ease-out forwards;
+    transition: opacity .4s;
+  }
+
+  @keyframes slide-in {
+    from {transform: translateY(10px);}
+    to {transform: translateY(0);}    
+  }
+
+  @keyframes slide-out {    
+    from {transform: translateY(0);}
+    to {transform: translateY(10px);}
+  }
 </style>
