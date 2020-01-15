@@ -13,16 +13,16 @@
 </template>
 
 <script>
-import Header from './components/Header.vue';
-import Footer from './components/Footer.vue';
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   components: {
     appHeader: Header,
     appFooter: Footer
   },
-  created() {
-    this.$store.dispatch('initGoods');
+  created () {
+    this.$store.dispatch('initGoods')
   }
 }
 </script>
@@ -50,10 +50,10 @@ export default {
 
   @keyframes slide-in {
     from {transform: translateY(10px);}
-    to {transform: translateY(0);}    
+    to {transform: translateY(0);}
   }
 
-  @keyframes slide-out {    
+  @keyframes slide-out {
     from {transform: translateY(0);}
     to {transform: translateY(10px);}
   }
